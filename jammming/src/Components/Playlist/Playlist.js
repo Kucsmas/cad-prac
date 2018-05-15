@@ -15,10 +15,13 @@ class Playlist extends React.Component {
   }
 
 
+  updatePlaylistName(name) {
+    this.setState({playlistName: name})
+  }
+
+
   handleNameChange(event) {
-    this.props.onNameChange({
-      playlistName: event.target.value
-    });
+    this.props.onNameChange(event);
     event.preventDefault();
   }
 
@@ -43,4 +46,3 @@ class Playlist extends React.Component {
 
 
 export default Playlist;
-
