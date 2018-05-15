@@ -39,38 +39,49 @@ class App extends React.Component {
 
   }
 
-  addTrack(track) {
-    if (this.state.playlistTracks.find(savedTrack => savedTrack.id === track.id)) {
-      return;
-    } else {
-      this.setState({playlistTracks: this.state.playlistTracks.push(track)});
+   addTrack(track) {
+      if (!this.state.playlistTracks.find(savedTrack => savedTrack.id === track)) {
+        this.setState({playlistTracks: this.state.playlistTracks.push(track)});
+      } else {
+        return;
+      }
     }
-  }
+
 
   updatePlaylistName(name) {
     this.setState({playlistName: name})
   }
 
-/* var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
-const result = words.filter(word => word.length > 6);
 
-console.log(result);
-// expected output: Array ["exuberant", "destruction", "present"]
- */
+  /* var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+     state.pltrks
+  const result = words.filter(word => word.length > 6);
+
+  console.log(result);
+  // expected output: Array ["exuberant", "destruction", "present"]
+  /*go thru each object in the state and if the id property
+   doesn't match up, allow it to be part of a new state array*/
+
 
   removeTrack(track) {
-    /*go thru each object in the state and if the id property
-     doesn't match up, allow it to be part of a new state array*/
-    this.state.playlistTracks.filter(doneTrack => track.id !== doneTrack.id)
+    this.state.playlistTracks.filter(badTrack => badTrack === track);
   }
 
+
+
+
+
+
+
   savePlaylist() {
-    let trackURIs = this.state.playlistTracks.filter(track => track)
+    let trackURIs = Spotify.savePlaylist();
+    this.setState({playlistName:'New Playlist',
+                   playlistTracks:[]})
   }
 
   search(term) {
-    console.log(term);
+    this.setState({searchResults:Spotify.search(term)});
   }
 
   render() {
