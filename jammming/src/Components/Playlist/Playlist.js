@@ -8,22 +8,17 @@ import TrackList from '../TrackList/TrackList.js';
 import './Playlist.css';
 
 class Playlist extends React.Component {
-  constructor(props) {
+ constructor(props) {
     super(props);
 
     this.handleNameChange = this.handleNameChange.bind(this);
   }
 
 
-  updatePlaylistName(name) {
-    this.setState({playlistName: name})
-  }
-
-
   handleNameChange(event) {
-    this.props.onNameChange(event);
+    this.props.onNameChange({playlistName: event.target.value});
     event.preventDefault();
-  }
+    }
 
 
 
